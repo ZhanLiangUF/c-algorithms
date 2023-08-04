@@ -50,7 +50,37 @@ struct node* deleteNode(struct node* root, int key)
     root->right = deleteNode(root->right, key);
 
   // Deleting Root
+  // One children empty
+  if (root->left == NULL) {
+    node* temp = root->right;
+    delete root;
+    return temp;  
+  }
+  if (root->right == NULL) {
+    node* temp = root->left;
+    delete root;
+    return temp;
+  }
   
+  // Both children exist
+  node* succParent = root;
+  
+  node* succ = root->right;
+  while (succ->left != NULL) {
+    succParent = succ;
+    succ = succ->left;
+  }
+  
+  if (succParent != root)
+    succParent->left = succ->right;
+  else
+    succParent->right = succ->right;
+
+  root->key = succ->key;
+
+  delete succ;
+  return root;
+
 }
 
 int main()

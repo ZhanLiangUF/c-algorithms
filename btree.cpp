@@ -38,6 +38,21 @@ struct node* search(struct node* root, int key)
     return search(root->right, key);
 } 
 
+struct node* deleteNode(struct node* root, int key)
+{
+  // Delete a leaf node in BST
+  if (root == NULL)
+    return NULL;
+
+  if (root->key > key)
+    root->left = deleteNode(root->left, key);
+  else if (root->key < key)
+    root->right = deleteNode(root->right, key);
+
+  // Deleting Root
+  
+}
+
 int main()
 {
  struct node* root = NULL;
@@ -69,3 +84,5 @@ class BTreeNode{
   int* keys;
   int t;
 };
+
+
